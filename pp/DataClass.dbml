@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="EsemkaCorporation" Class="DataClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-FAHRI\SQLEXPRESS;Initial Catalog=EsemkaCorporation;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="pp.Properties.Settings" SettingsPropertyName="EsemkaCorporationConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.employee" Member="employees">
+    <Type Name="employee">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="hire_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="employee_position" Member="positions" ThisKey="id" OtherKey="employee_id" Type="position" />
+      <Association Name="employee_mutation" Member="mutations" ThisKey="id" OtherKey="employee_id" Type="mutation" />
+      <Association Name="employee_promotion" Member="promotions" ThisKey="id" OtherKey="employee_id" Type="promotion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.position" Member="positions">
+    <Type Name="position">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="employee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="employee_position" Member="employee" ThisKey="employee_id" OtherKey="id" Type="employee" IsForeignKey="true" />
+      <Association Name="job_position" Member="job" ThisKey="job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.job_level" Member="job_levels">
+    <Type Name="job_level">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="job_level_job" Member="jobs" ThisKey="id" OtherKey="job_level_id" Type="job" />
+    </Type>
+  </Table>
+  <Table Name="dbo.department" Member="departments">
+    <Type Name="department">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="abbreviation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="department_job" Member="jobs" ThisKey="id" OtherKey="department_id" Type="job" />
+    </Type>
+  </Table>
+  <Table Name="dbo.job" Member="jobs">
+    <Type Name="job">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="department_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="job_level_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="supervisor_job_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="head_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="job_position" Member="positions" ThisKey="id" OtherKey="job_id" Type="position" />
+      <Association Name="job_job" Member="jobs" ThisKey="id" OtherKey="supervisor_job_id" Type="job" />
+      <Association Name="job_mutation" Member="mutations" ThisKey="id" OtherKey="job_id" Type="mutation" />
+      <Association Name="job_promotion" Member="promotions" ThisKey="id" OtherKey="job_id" Type="promotion" />
+      <Association Name="department_job" Member="department" ThisKey="department_id" OtherKey="id" Type="department" IsForeignKey="true" />
+      <Association Name="job_level_job" Member="job_level" ThisKey="job_level_id" OtherKey="id" Type="job_level" IsForeignKey="true" />
+      <Association Name="job_job" Member="job1" ThisKey="supervisor_job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mutation" Member="mutations">
+    <Type Name="mutation">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="employee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="employee_mutation" Member="employee" ThisKey="employee_id" OtherKey="id" Type="employee" IsForeignKey="true" />
+      <Association Name="job_mutation" Member="job" ThisKey="job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promotion" Member="promotions">
+    <Type Name="promotion">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="job_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="employee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="employee_promotion" Member="employee" ThisKey="employee_id" OtherKey="id" Type="employee" IsForeignKey="true" />
+      <Association Name="job_promotion" Member="job" ThisKey="job_id" OtherKey="id" Type="job" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
