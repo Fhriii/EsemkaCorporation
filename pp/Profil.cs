@@ -36,16 +36,21 @@ namespace pp
             try
             {
             var data = (from a in dc3.employees where a.id == emp_id select a).FirstOrDefault();
+            var data2 = (from b in dc3.positions where b.job_id == emp_id select b).FirstOrDefault();
+            var data3 = (from c in dc3.jobs where c.id== data2.job_id select c).FirstOrDefault();
+            var data4 = (from d in dc3.departments where d.id== data3.department_id select d).FirstOrDefault();
                
-                if (data != null)
+                if (data != null || data2 != null)
                 {
                     textBox1.Text = data.name;
                     textBox2.Text = data.email;
                     textBox3.Text = data.phone_number;
                     textBox4.Text = data.hire_date.ToString();
-
-
+                    textBox5.Text = data2.job_id.ToString();
+                    textBox6.Text = data3.name;
+                    textBox7.Text = data4.name;
                 }
+
 
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }

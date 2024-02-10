@@ -45,6 +45,18 @@
             label7 = new Label();
             label8 = new Label();
             linkLabel1 = new LinkLabel();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            groupBox3 = new GroupBox();
+            dataGridView1 = new DataGridView();
+            dataGridView2 = new DataGridView();
+            dataGridView3 = new DataGridView();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -209,11 +221,68 @@
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Direct Supervisor Name";
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(dataGridView1);
+            groupBox1.Location = new Point(42, 357);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(289, 139);
+            groupBox1.TabIndex = 17;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(dataGridView2);
+            groupBox2.Location = new Point(387, 59);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(379, 171);
+            groupBox2.TabIndex = 18;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "groupBox2";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(dataGridView3);
+            groupBox3.Location = new Point(387, 333);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(379, 163);
+            groupBox3.TabIndex = 19;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "groupBox3";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(19, 22);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(255, 105);
+            dataGridView1.TabIndex = 0;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(29, 30);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.Size = new Size(318, 121);
+            dataGridView2.TabIndex = 1;
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(29, 24);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.Size = new Size(318, 118);
+            dataGridView3.TabIndex = 2;
+            // 
             // Profil
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 480);
+            ClientSize = new Size(800, 508);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Controls.Add(linkLabel1);
             Controls.Add(label8);
             Controls.Add(textBox7);
@@ -234,6 +303,12 @@
             Name = "Profil";
             Text = "Profil";
             Load += Profil_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -257,5 +332,11 @@
         private Label label7;
         private Label label8;
         private LinkLabel linkLabel1;
+        private GroupBox groupBox1;
+        private DataGridView dataGridView1;
+        private GroupBox groupBox2;
+        private DataGridView dataGridView2;
+        private GroupBox groupBox3;
+        private DataGridView dataGridView3;
     }
 }
